@@ -1404,4 +1404,17 @@ task.spawn(function()
             baseprotection(LocalPlayer)
         end
     end
+
 end)
+
+local success, err = pcall(function()
+    local shothook; shothook = hookmetamethod(game, "__namecall", function(self, ...)
+        local args = { ... }
+        local method = getnamecallmethod()
+        if tostring(self) == "Report" and method == "FireServer" then
+            args[1] = CFrame.new(NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN)
+        end
+        return shothook(self, unpack(args))
+    end)
+end)
+-----------------------------------------------------------------------------------------------------------
